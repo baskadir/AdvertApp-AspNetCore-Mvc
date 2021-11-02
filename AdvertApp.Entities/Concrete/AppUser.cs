@@ -14,7 +14,7 @@ namespace AdvertApp.Entities.Concrete
         public string Email { get; set; }
         public DateTime BirthDate { get; set; }
         public string School { get; set; }
-        public string Address { get; set; }
+        public string City { get; set; }
         public int GenderId { get; set; }
         public Gender Gender { get; set; }
         public ICollection<AppUserRole> AppUserRoles { get; set; }
