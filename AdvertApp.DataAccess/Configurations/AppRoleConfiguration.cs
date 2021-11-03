@@ -11,8 +11,6 @@ namespace AdvertApp.DataAccess.Configurations
         {
             builder.Property(x => x.Name).HasMaxLength(300).IsRequired();
             builder.Property(x => x.CreatedDate).HasDefaultValueSql("getdate()");
-
-            // TODO: Hasdata ile rolleri başlangıçta kayıt et
         }
     }
 }

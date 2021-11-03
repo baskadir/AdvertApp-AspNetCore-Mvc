@@ -1,4 +1,5 @@
 ﻿using AdvertApp.DataAccess.Configurations;
+using AdvertApp.DataAccess.SeedData;
 using AdvertApp.Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,7 +9,6 @@ namespace AdvertApp.DataAccess.Context
     {
         public AdvertDbContext(DbContextOptions<AdvertDbContext> options):base(options)
         { 
-            //TODO: Database configurationları startupda yap
         }
 
         public DbSet<About> Abouts { get; set; }
@@ -32,6 +32,12 @@ namespace AdvertApp.DataAccess.Context
             modelBuilder.ApplyConfiguration(new AppUserRoleConfiguration());
             modelBuilder.ApplyConfiguration(new GenderConfiguration());
             modelBuilder.ApplyConfiguration(new MilitaryStatusConfiguration());
+
+            modelBuilder.ApplyConfiguration(new ApplicationStatusDataSeed());
+            modelBuilder.ApplyConfiguration(new AppRoleDataSeed());
+            modelBuilder.ApplyConfiguration(new GenderDataSeed());
+            modelBuilder.ApplyConfiguration(new MilitaryStatusDataSeed());
+            modelBuilder.ApplyConfiguration(new AboutDataSeed());
         }
     }
 }

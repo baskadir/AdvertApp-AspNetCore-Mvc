@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AdvertApp.DataAccess.Interfaces
 {
-    public interface IRepository<T> where T : BaseEntity
+    public interface IRepository<T> where T : class
     {
         Task<IEnumerable<T>> GetAllAsync();
         Task<IEnumerable<T>> GetAllAsync(Expression<Func<T,bool>> filter);

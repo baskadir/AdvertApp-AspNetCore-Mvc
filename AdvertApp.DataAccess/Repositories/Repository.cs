@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace AdvertApp.DataAccess.Repositories
 {
-    public class Repository<T> : IRepository<T> where T : BaseEntity
+    public class Repository<T> : IRepository<T> where T : class
     {
         private readonly AdvertDbContext _context;
         public Repository(AdvertDbContext context)

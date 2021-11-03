@@ -10,7 +10,6 @@ namespace AdvertApp.DataAccess.Configurations
         {
             builder.Property(x => x.Definition).HasMaxLength(300).IsRequired();
             builder.Property(x => x.CreatedDate).HasDefaultValueSql("getdate()");
-            //TODO: hasdata ile seed 
         }
     }
 }
