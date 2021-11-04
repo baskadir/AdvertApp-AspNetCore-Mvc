@@ -9,9 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdvertApp.DataAccess", "Adv
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdvertApp.Common", "AdvertApp.Common\AdvertApp.Common.csproj", "{9F4893FA-D39C-4DCA-A1F4-04978F800B6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvertApp.Business", "AdvertApp.Business\AdvertApp.Business.csproj", "{13F5BB71-9005-49AC-85C0-222B6349B363}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdvertApp.Business", "AdvertApp.Business\AdvertApp.Business.csproj", "{13F5BB71-9005-49AC-85C0-222B6349B363}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvertApp.UI", "AdvertApp.UI\AdvertApp.UI.csproj", "{0F7EC728-DD35-449A-82F4-36BB52001211}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdvertApp.UI", "AdvertApp.UI\AdvertApp.UI.csproj", "{0F7EC728-DD35-449A-82F4-36BB52001211}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvertApp.Dtos", "AdvertApp.Dtos\AdvertApp.Dtos.csproj", "{9A528E4F-902B-4398-A3A1-4CADD515A747}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{0F7EC728-DD35-449A-82F4-36BB52001211}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F7EC728-DD35-449A-82F4-36BB52001211}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F7EC728-DD35-449A-82F4-36BB52001211}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A528E4F-902B-4398-A3A1-4CADD515A747}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A528E4F-902B-4398-A3A1-4CADD515A747}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A528E4F-902B-4398-A3A1-4CADD515A747}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A528E4F-902B-4398-A3A1-4CADD515A747}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
