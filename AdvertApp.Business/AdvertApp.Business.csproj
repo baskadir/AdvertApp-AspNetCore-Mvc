@@ -10,6 +10,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AdvertApp.DataAccess\AdvertApp.DataAccess.csproj" />
+    <ProjectReference Include="..\AdvertApp.Dtos\AdvertApp.Dtos.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ValidationRules\" />
   </ItemGroup>
 
 </Project>
