@@ -1,5 +1,6 @@
 ﻿using AdvertApp.Common.ResponseObjects;
 using AdvertApp.Dtos.Interfaces;
+using AdvertApp.Entities.Abstract;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -9,7 +10,7 @@ namespace AdvertApp.Business.Interfaces
         where CreateDto : class,IDto,new()
         where UpdateDto : class,IUpdateDto,new()
         where ListDto : class, IDto, new()
-        where T : class
+        where T : BaseEntity
     {
         Task<IResponse<CreateDto>> CreateAsync(CreateDto dto);
         Task<IResponse<IEnumerable<ListDto>>> GetAllAsync();
