@@ -1,8 +1,7 @@
-﻿using AdvertApp.Dtos.GenderDtos;
-using AdvertApp.Dtos.Interfaces;
+﻿using AdvertApp.Dtos.Interfaces;
 using System;
 
-namespace AdvertApp.Dtos.AppUserDtos
+namespace AdvertApp.Dtos
 {
     public class AppUserListDto : IDto
     {

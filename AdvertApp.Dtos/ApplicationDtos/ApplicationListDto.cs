@@ -1,10 +1,7 @@
-﻿using AdvertApp.Dtos.AdvertisementDtos;
-using AdvertApp.Dtos.AppUserDtos;
-using AdvertApp.Dtos.Interfaces;
-using AdvertApp.Dtos.MilitaryStatusDtos;
+﻿using AdvertApp.Dtos.Interfaces;
 using System;
 
-namespace AdvertApp.Dtos.ApplicationDtos
+namespace AdvertApp.Dtos
 {
     public class ApplicationListDto : IDto
     {

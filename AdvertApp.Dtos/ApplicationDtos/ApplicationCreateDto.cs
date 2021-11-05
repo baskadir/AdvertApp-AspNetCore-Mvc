@@ -1,7 +1,7 @@
 ﻿using AdvertApp.Dtos.Interfaces;
 using System;
 
-namespace AdvertApp.Dtos.ApplicationDtos
+namespace AdvertApp.Dtos
 {
     public class ApplicationCreateDto : IDto
     {

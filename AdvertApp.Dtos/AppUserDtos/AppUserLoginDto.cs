@@ -1,6 +1,6 @@
 ﻿using AdvertApp.Dtos.Interfaces;
 
-namespace AdvertApp.Dtos.AppUserDtos
+namespace AdvertApp.Dtos
 {
     public class AppUserLoginDto : IDto
     {

@@ -1,7 +1,7 @@
 ﻿using AdvertApp.Dtos.Interfaces;
 using System;
 
-namespace AdvertApp.Dtos.GenderDtos
+namespace AdvertApp.Dtos
 {
     public class GenderListDto : IDto
     {
