@@ -1,7 +1,7 @@
 ﻿using AdvertApp.Dtos.Interfaces;
 using System;
 
-namespace AdvertApp.Dtos.MilitaryStatusDtos
+namespace AdvertApp.Dtos
 {
     public class MilitaryStatusListDto : IDto
     {

@@ -1,6 +1,6 @@
 ﻿using AdvertApp.Dtos.Interfaces;
 
-namespace AdvertApp.Dtos.AdvertisementDtos
+namespace AdvertApp.Dtos
 {
     public class AdvertisementUpdateDto : IUpdateDto
     {

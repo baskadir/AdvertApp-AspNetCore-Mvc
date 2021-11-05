@@ -1,7 +1,7 @@
 ﻿using AdvertApp.Dtos.Interfaces;
 using System;
 
-namespace AdvertApp.Dtos.AppRoleDtos
+namespace AdvertApp.Dtos
 {
     public class AppRoleListDto : IDto
     {

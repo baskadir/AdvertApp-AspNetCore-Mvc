@@ -1,6 +1,6 @@
 ﻿using AdvertApp.Dtos.Interfaces;
 
-namespace AdvertApp.Dtos.AboutDtos
+namespace AdvertApp.Dtos
 {
     public class AboutCreateDto : IDto
     {

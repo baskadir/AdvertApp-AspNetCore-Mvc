@@ -1,6 +1,6 @@
 ﻿using AdvertApp.Dtos.Interfaces;
 
-namespace AdvertApp.Dtos.ApplicationStatusDtos
+namespace AdvertApp.Dtos
 {
     public class ApplicationStatusListDto : IDto
     {
