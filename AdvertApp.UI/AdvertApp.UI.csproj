@@ -15,4 +15,9 @@
     <ProjectReference Include="..\AdvertApp.Business\AdvertApp.Business.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\startbootstrap-landing-page-gh-pages\startbootstrap-landing-page-gh-pages\css\" />
+    <Folder Include="wwwroot\startbootstrap-landing-page-gh-pages\startbootstrap-landing-page-gh-pages\js\" />
+  </ItemGroup>
+
 </Project>

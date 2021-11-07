@@ -1,4 +1,6 @@
-﻿using AdvertApp.Business.ValidationRules;
+﻿using AdvertApp.Business.Interfaces;
+using AdvertApp.Business.Services;
+using AdvertApp.Business.ValidationRules;
 using AdvertApp.DataAccess.Context;
 using AdvertApp.DataAccess.UnitOfWork;
 using AdvertApp.Dtos;
@@ -27,10 +29,15 @@ namespace AdvertApp.Business.Extensions
             services.AddTransient<IValidator<AppUserCreateDto>, AppUserCreateDtoValidator>();
             services.AddTransient<IValidator<AppUserUpdateDto>, AppUserUpdateDtoValidator>();
             services.AddTransient<IValidator<AppUserLoginDto>, AppUserLoginDtoValidator>();
-            services.AddTransient<IValidator<ApplicationCreateDto>, ApplicationCreateDtoValidator>();
+            services.AddTransient<IValidator<ApplicationCreateDto>, ApplicationCreateDtoValidator>(); 
+            services.AddTransient<IValidator<GenderCreateDto>, GenderCreateDtoValidator>(); 
+            services.AddTransient<IValidator<GenderUpdateDto>, GenderUpdateDtoValidator>(); 
 
-            // TODO: Startup'a mappingleri ekle 
-            // TODO: Servisleri ekle
+            services.AddScoped<IAboutService, AboutService>();
+            services.AddScoped<IAdvertisementService, AdvertisementService>();
+            services.AddScoped<IApplicationService, ApplicationService>();
+            services.AddScoped<IAppUserService, AppUserService>();
+            services.AddScoped<IGenderService, GenderService>();
         }
     }
 }

@@ -1,0 +1,32 @@
+﻿@model AdvertisementListDto
+
+<div class="container my-5">
+    <div class="row  d-flex flex-column align-items-center">
+        <div class="col-9">
+            <div>
+                <h2 class="text-uppercase text-primary">@Model.Title</h2>
+                <p><em><strong>@Model.CompanyName, @Model.City</strong></em></p>
+            </div>
+            <hr />
+            <div>
+                <h4 class="text-center">İlan Detayı</h4>
+                <p class="lh-lg" style="text-align:justify;">@Model.Description</p>
+            </div>
+            <hr />
+            <div>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a class="btn btn-success w-100">
+                        BAŞVUR
+                    </a>
+                }
+                else
+                {
+                    <div class="alert alert-light text-center">
+                        Başvuru yapabilmek için giriş yapmanız gerekmektedir. <a asp-action="SignIn" asp-controller="Account">Giriş Yap</a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
