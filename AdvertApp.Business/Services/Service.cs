@@ -51,7 +51,7 @@ namespace AdvertApp.Business.Services
             return new Response<IEnumerable<ListDto>>(ResponseType.Success, dto);
         }
 
-        public async Task<IResponse<IDto>> GetByIdAsync(int id)
+        public async Task<IResponse<IDto>> GetByIdAsync<IDto>(int id)
         {
             var data = await _unitOfWork.GetRepository<T>().GetByFilterAsync(x => x.Id == id);
             if (data == null)
