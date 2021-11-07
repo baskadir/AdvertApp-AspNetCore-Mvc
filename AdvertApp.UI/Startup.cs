@@ -1,4 +1,6 @@
 using AdvertApp.Business.Extensions;
+using AdvertApp.Business.Helpers;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -24,6 +26,18 @@ namespace AdvertApp.UI
         {
             services.AddDependencies(Configuration);
             services.AddControllersWithViews();
+
+            #region Mapper Configuration
+            var profiles = ProfileHelper.GetProfiles();
+
+            var mapperConfiguration = new MapperConfiguration(options =>
+            {
+                options.AddProfiles(profiles);
+            });
+
+            var mapper = mapperConfiguration.CreateMapper();
+            services.AddSingleton(mapper); 
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -33,6 +47,8 @@ namespace AdvertApp.UI
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseStaticFiles();
 
             app.UseRouting();
 
