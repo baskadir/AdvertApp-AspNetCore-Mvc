@@ -3,36 +3,29 @@
 <div class="mt-4">
     <form asp-action="SignUp" asp-controller="Account" method="post" class="p-4 w-75 mx-auto">
         <div class="mb-3">
-            <label>İsminiz : </label>
-            <input asp-for="FirstName" class="form-control" />
+            <input asp-for="FirstName" class="form-control" placeholder="İsminiz" />
         </div>
         <div class="mb-3">
-            <label>Soyisminiz : </label>
-            <input asp-for="LastName" class="form-control" />
+            <input asp-for="LastName" class="form-control" placeholder="Soyisminiz" />
         </div>
         <div class="mb-3">
-            <label>Kullanıcı Adınız : </label>
-            <input asp-for="Username" class="form-control" />
+            <input asp-for="Username" class="form-control" placeholder="Kullanıcı Adınız" />
         </div>
         <div class="mb-3">
-            <label>Mail Adresiniz : </label>
-            <input asp-for="Email" class="form-control" />
+            <input asp-for="Email" class="form-control" placeholder="Mail Adresiniz" />
         </div>
         <div class="mb-3">
-            <label>Telefon Numaranız : </label>
-            <input asp-for="PhoneNumber" class="form-control" />
+            <input asp-for="PhoneNumber" class="form-control" placeholder="Telefon Numaranız" />
+        </div>
+        <div class="mb-3 d-flex">
+            <label>Doğum Tarihiniz :</label>
+            <input type="date" asp-for="BirthDate" class="form-control" value="@(DateTime.Today.AddYears(-18).ToString("yyyy-MM-dd"))" min="1900-10-10" max="@(DateTime.Today.AddYears(-18).ToString("yyyy-MM-dd"))" />
         </div>
         <div class="mb-3">
-            <label>Doğum tarihiniz : </label>
-            <input type="date" asp-for="BirthDate" class="form-control" />
+            <input asp-for="School" class="form-control" placeholder="En Son Mezun Olduğunuz Okul" />
         </div>
         <div class="mb-3">
-            <label>En Son Mezun Olduğunuz Okul : </label>
-            <input asp-for="School" class="form-control" />
-        </div>
-        <div class="mb-3">
-            <label>Yaşadığınız Şehir : </label>
-            <input asp-for="City" class="form-control" />
+            <input asp-for="City" class="form-control" placeholder="Yaşadığınız Şehir" />
         </div>
         <div class="mb-3">
             <select class="form-select" asp-items="@Model.Genders" asp-for="GenderId">
@@ -40,12 +33,10 @@
             </select>
         </div>
         <div class="mb-3">
-            <label>Şifreniz : </label>
-            <input type="password" asp-for="Password" class="form-control" />
+            <input type="password" asp-for="Password" class="form-control" placeholder="Şifreniz" />
         </div>
         <div class="mb-3">
-            <label>Şifre Tekrar : </label>
-            <input type="password" asp-for="ConfirmPassword" class="form-control" />
+            <input type="password" asp-for="ConfirmPassword" class="form-control" placeholder="Tekrar Şifreniz" />
         </div>
         <div class="mb-3 text-end">
             <button class="btn btn-success" type="submit">Kayıt Ol</button>
