@@ -1,6 +1,6 @@
 ﻿@model AdvertisementListDto
 
-<div class="container my-5">
+<div class="container pt-5 pb-3">
     <div class="row  d-flex flex-column align-items-center">
         <div class="col-9">
             <div>
@@ -10,7 +10,7 @@
             <hr />
             <div>
                 <h4 class="text-center">İlan Detayı</h4>
-                <p class="lh-lg" style="text-align:justify;">@Model.Description</p>
+                <p class="lh-lg" style="text-align:justify;">@Html.Raw(Model.Description)</p>
             </div>
             <hr />
             <div>

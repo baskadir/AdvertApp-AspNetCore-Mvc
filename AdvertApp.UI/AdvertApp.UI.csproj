@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\startbootstrap-landing-page-gh-pages\**" />
+    <Content Remove="wwwroot\startbootstrap-landing-page-gh-pages\**" />
+    <EmbeddedResource Remove="wwwroot\startbootstrap-landing-page-gh-pages\**" />
+    <None Remove="wwwroot\startbootstrap-landing-page-gh-pages\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.11">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -13,11 +20,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AdvertApp.Business\AdvertApp.Business.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\startbootstrap-landing-page-gh-pages\startbootstrap-landing-page-gh-pages\css\" />
-    <Folder Include="wwwroot\startbootstrap-landing-page-gh-pages\startbootstrap-landing-page-gh-pages\js\" />
   </ItemGroup>
 
 </Project>

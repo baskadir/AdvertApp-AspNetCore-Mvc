@@ -1,6 +1,11 @@
 using AdvertApp.Business.Extensions;
 using AdvertApp.Business.Helpers;
+using AdvertApp.UI.Mappings;
+using AdvertApp.UI.Models;
+using AdvertApp.UI.ValidationRules;
 using AutoMapper;
+using FluentValidation;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -8,9 +13,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace AdvertApp.UI
 {
@@ -25,10 +27,27 @@ namespace AdvertApp.UI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDependencies(Configuration);
+            services.AddTransient<IValidator<UserCreateModel>, UserCreateModelValidator>();
+
+            #region Cookie Configuration
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
+            {
+                options.Cookie.Name = ".AdvertAppCookie";
+                options.Cookie.HttpOnly = true;
+                options.Cookie.SameSite = SameSiteMode.Strict;
+                options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+                options.ExpireTimeSpan = TimeSpan.FromHours(10);
+                options.LoginPath = new PathString("/Account/SignIn");
+                options.LogoutPath = new PathString("/Account/LogOut");
+                options.AccessDeniedPath = new PathString("/Account/AccessDenied");
+            });
+            #endregion
+
             services.AddControllersWithViews();
 
             #region Mapper Configuration
             var profiles = ProfileHelper.GetProfiles();
+            profiles.Add(new UserCreateModelProfile());
 
             var mapperConfiguration = new MapperConfiguration(options =>
             {
@@ -36,7 +55,7 @@ namespace AdvertApp.UI
             });
 
             var mapper = mapperConfiguration.CreateMapper();
-            services.AddSingleton(mapper); 
+            services.AddSingleton(mapper);
             #endregion
         }
 
@@ -49,8 +68,10 @@ namespace AdvertApp.UI
             }
 
             app.UseStaticFiles();
-
             app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
