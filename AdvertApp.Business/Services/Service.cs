@@ -79,6 +79,7 @@ namespace AdvertApp.Business.Services
                 if (unchangedData == null)
                     return new Response<UpdateDto>(ResponseType.NotFound, $"{dto.Id} idsine sahip bir data bulunamadı");
                 var data = _mapper.Map<T>(dto);
+                data.CreatedDate = unchangedData.CreatedDate;
                 _unitOfWork.GetRepository<T>().Update(data, unchangedData);
                 await _unitOfWork.SaveChangesAsync();
                 return new Response<UpdateDto>(ResponseType.Success, dto);
