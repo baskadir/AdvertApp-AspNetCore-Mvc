@@ -12,6 +12,8 @@ namespace AdvertApp.Dtos
         public AppUserListDto AppUser { get; set; }
         public int MilitaryStatusId { get; set; }
         public MilitaryStatusListDto MilitaryStatus { get; set; }
+        public int ApplicationStatusId { get; set; }
+        public ApplicationStatusListDto ApplicationStatus { get; set; }
         public DateTime? PostponeEndDate { get; set; }
         public int WorkExperience { get; set; }
         public string CvPath { get; set; }

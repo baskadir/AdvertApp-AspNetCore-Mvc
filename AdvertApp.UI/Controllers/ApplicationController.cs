@@ -70,6 +70,7 @@ namespace AdvertApp.UI.Controllers
             dto.PostponeEndDate = model.PostponeEndDate;
             dto.MilitaryStatusId = model.MilitaryStatusId;
             dto.WorkExperience = model.WorkExperience;
+            dto.AppliedDate = model.AppliedDate;
 
             var response = await _applicationService.CreateAsync(dto);
             if (response.ResponseType == ResponseType.ValidationError)
@@ -100,6 +101,20 @@ namespace AdvertApp.UI.Controllers
         }
 
         // TODO: Kullanıcı bir ilana başvuru yaptıysa aynı ilana tekrar başvuru yapamasın. İlan sayfasında başvur butonu gözükmesin.
+
+        [Authorize(Roles ="Admin")]
+        public async Task<IActionResult> List()
+        {
+            var list = await _applicationService.GetListAsync(ApplicationStatusType.Applied);
+            return View(list);
+        }
+
+        [Authorize(Roles ="Admin")]
+        public async Task<IActionResult> SetStatus(int applicationId,ApplicationStatusType type)
+        {
+            await _applicationService.SetStatusAsync(applicationId, type);
+            return RedirectToAction("List");
+        }
 
         private async Task<string> CreateFile(IFormFile file, string fileDirectory)
         {
