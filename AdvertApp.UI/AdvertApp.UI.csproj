@@ -22,4 +22,9 @@
     <ProjectReference Include="..\AdvertApp.Business\AdvertApp.Business.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\cvFiles\" />
+    <Folder Include="wwwroot\photoFiles\" />
+  </ItemGroup>
+
 </Project>

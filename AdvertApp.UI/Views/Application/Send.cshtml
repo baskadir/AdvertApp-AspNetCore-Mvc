@@ -1,0 +1,61 @@
+﻿@model ApplicationCreateModel
+
+<form asp-action="Send" asp-controller="Application" class="w-75 mx-auto p-3" enctype="multipart/form-data">
+    <input type="hidden" asp-for="AdvertisementId" />
+    <input type="hidden" asp-for="AppUserId" />
+
+    @if (ViewBag.GenderId == (int)GenderType.Male)
+    {
+        <div class="mb-3">
+            <label>Askerlik Durumu : </label>
+            <select onchange="setInputVisibility()" asp-for="MilitaryStatusId" asp-items="@ViewBag.MilitaryStatus" class="form-select">
+            </select>
+        </div>
+        <div class="mb-3" style="display:none;" id="dateDiv">
+            <label>Tecil Tarihi : </label>
+            <input type="date" asp-for="PostponeEndDate" class="form-control" />
+        </div>
+    }
+    else
+    {
+        <input type="hidden" asp-for="MilitaryStatusId" value="@((int)MilitaryStatusType.Exempt)" />
+    }
+    <div class="mb-3">
+        <label>İş deneyiminiz(yıl) : </label>
+        <input type="number" asp-for="WorkExperience" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Fotoğrafınız : </label>
+        <input type="file" asp-for="PhotoFile" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Özgeçmişiniz : </label>
+        <input type="file" asp-for="CvFile" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <button class="btn btn-success">Başvurumu Gönder</button>
+    </div>
+    <div class="text-danger" asp-validation-summary="All">
+
+    </div>
+</form>
+
+@section scripts {
+    <script>
+        setInputVisibility();
+        function setInputVisibility() {
+            let selectElement = document.getElementById("MilitaryStatusId");
+            let militaryStatusId = selectElement.value;
+            let dateDivElement = document.getElementById("dateDiv");
+            if (militaryStatusId == 2) {
+                dateDivElement.style.display = 'block';
+            }
+            else {
+                dateDivElement.style.display = 'none';
+            }
+        }
+    </script>
+}
