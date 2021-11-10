@@ -11,5 +11,6 @@ namespace AdvertApp.Business.Interfaces
         Task<IResponse<ApplicationCreateDto>> CreateAsync(ApplicationCreateDto dto);
         Task<IEnumerable<ApplicationListDto>> GetListAsync(ApplicationStatusType type);
         Task SetStatusAsync(int applicationId, ApplicationStatusType type);
+        Task<bool> CheckUserApplicationAsync(int advertId, int userId);
     }
 }

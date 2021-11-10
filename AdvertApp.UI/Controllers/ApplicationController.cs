@@ -29,6 +29,9 @@ namespace AdvertApp.UI.Controllers
         public async Task<IActionResult> Send(int advertId)
         {
             var userId = Convert.ToInt32((User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)).Value);
+            bool applicationCheck = _applicationService.CheckUserApplicationAsync(advertId, userId).Result;
+            if (applicationCheck)
+                return RedirectToAction("AdvertDetail", "Home", new {id=advertId});
             var userResponse = await _appUserService.GetByIdAsync<AppUserListDto>(userId);
 
             ViewBag.GenderId = userResponse.Data.GenderId;
@@ -99,8 +102,6 @@ namespace AdvertApp.UI.Controllers
             }
             return RedirectToAction("AdvertList", "Home");
         }
-
-        // TODO: Kullanıcı bir ilana başvuru yaptıysa aynı ilana tekrar başvuru yapamasın. İlan sayfasında başvur butonu gözükmesin.
 
         [Authorize(Roles ="Admin")]
         public async Task<IActionResult> List()

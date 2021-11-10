@@ -16,9 +16,18 @@
             <div>
                 @if (User.Identity.IsAuthenticated)
                 {
-                    <a class="btn btn-success w-100" asp-action="Send" asp-controller="Application" asp-route-advertId="@Model.Id">
-                        BAŞVUR
-                    </a>
+                    @if (!Model.IsApplied)
+                    {
+                        <a class="btn btn-success w-100" asp-action="Send" asp-controller="Application" asp-route-advertId="@Model.Id">
+                            BAŞVUR
+                        </a>
+                    }
+                    else
+                    {
+                        <div class="alert alert-light text-center">
+                            Daha önceden bu ilana başvuru yapmışsınız.
+                        </div>
+                    }
                 }
                 else
                 {

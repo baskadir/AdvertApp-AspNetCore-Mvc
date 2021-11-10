@@ -67,5 +67,11 @@ namespace AdvertApp.Business.Services
             entity.ApplicationStatusId = (int)type;
             await _unitOfWork.SaveChangesAsync();
         }
+
+        public async Task<bool> CheckUserApplicationAsync(int advertId, int userId)
+        {
+            var data = await _unitOfWork.GetRepository<Application>().GetByFilterAsync(x=>x.AdvertisementId == advertId && x.AppUserId == userId);
+            return data == null ? false : true;
+        }
     }
 }

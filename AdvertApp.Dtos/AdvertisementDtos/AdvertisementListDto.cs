@@ -12,5 +12,6 @@ namespace AdvertApp.Dtos
         public string City { get; set; }
         public string CompanyName { get; set; }
         public DateTime CreatedDate { get; set; }
+        public bool IsApplied { get; set; }
     }
 }
