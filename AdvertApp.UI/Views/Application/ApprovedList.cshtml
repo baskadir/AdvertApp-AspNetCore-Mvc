@@ -4,7 +4,7 @@
     @if (Model?.Count > 0)
     {
         <div class="text-end my-3 p-1">
-            <a asp-action="ApprovedList" asp-controller="Application">Mülakata Çağrılan Başvurular</a>
+            <a asp-action="List" asp-controller="Application">Yeni Başvurular</a>
             <a asp-action="RejectedList" asp-controller="Application">Reddedilen Başvurular</a>
         </div>
 
@@ -44,7 +44,7 @@
     else
     {
         <div class="text-end my-3 p-1">
-            <a asp-action="ApprovedList" asp-controller="Application">Mülakata Çağrılan Başvurular</a>
+            <a asp-action="List" asp-controller="Application">Yeni Başvurular</a>
             <a asp-action="RejectedList" asp-controller="Application">Reddedilen Başvurular</a>
         </div>
         <div class="mt-3 text-center lead">
@@ -52,6 +52,8 @@
         </div>
     }
 </div>
+
+
 
 
 

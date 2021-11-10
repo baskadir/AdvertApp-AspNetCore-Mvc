@@ -116,6 +116,20 @@ namespace AdvertApp.UI.Controllers
             return RedirectToAction("List");
         }
 
+        [Authorize(Roles ="Admin")]
+        public async Task<IActionResult> ApprovedList()
+        {
+            var list = await _applicationService.GetListAsync(ApplicationStatusType.InterviewCall);
+            return View(list);
+        }
+
+        [Authorize(Roles ="Admin")]
+        public async Task<IActionResult> RejectedList()
+        {
+            var list = await _applicationService.GetListAsync(ApplicationStatusType.Negative);
+            return View(list);
+        }
+
         private async Task<string> CreateFile(IFormFile file, string fileDirectory)
         {
             var fileName = Guid.NewGuid().ToString();
