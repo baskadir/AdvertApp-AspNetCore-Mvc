@@ -13,5 +13,6 @@ namespace AdvertApp.Business.Interfaces
         Task SetStatusAsync(int applicationId, ApplicationStatusType type);
         Task<bool> CheckUserApplicationAsync(int advertId, int userId);
         Task<IEnumerable<ApplicationListDto>> GetUserApplications(int userId);
+        Task<IResponse> RemoveAsync(int id);
     }
 }

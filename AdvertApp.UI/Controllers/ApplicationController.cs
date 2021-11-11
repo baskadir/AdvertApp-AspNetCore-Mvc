@@ -1,6 +1,7 @@
 ﻿using AdvertApp.Business.Interfaces;
 using AdvertApp.Common.Enums;
 using AdvertApp.Dtos;
+using AdvertApp.UI.Extensions;
 using AdvertApp.UI.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -137,6 +138,12 @@ namespace AdvertApp.UI.Controllers
             var userId = Convert.ToInt32((User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)).Value);
             var list = await _applicationService.GetUserApplications(userId);
             return View(list);
+        }
+
+        public async Task<IActionResult> Remove(int applicationId)
+        {
+            var response = await _applicationService.RemoveAsync(applicationId);
+            return this.ResponseRediretAction(response, "AppliedList");
         }
 
         private async Task<string> CreateFile(IFormFile file, string fileDirectory)
