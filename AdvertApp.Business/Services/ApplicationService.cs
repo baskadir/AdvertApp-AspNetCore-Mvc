@@ -76,19 +76,10 @@ namespace AdvertApp.Business.Services
 
         public async Task<IEnumerable<ApplicationListDto>> GetUserApplications(int userId)
         {
+            //var list = await _unitOfWork.GetRepository<Application>().GetAllAsync(x => x.AppUserId == userId);
             var query = _unitOfWork.GetRepository<Application>().GetQuery();
             var list = await query.Include(x => x.Advertisement).Include(x => x.ApplicationStatus).Include(x => x.MilitaryStatus).Include(x => x.AppUser).ThenInclude(x => x.Gender).Where(x => x.AppUserId == userId).ToListAsync();
             return _mapper.Map<IEnumerable<ApplicationListDto>>(list);
-        }
-
-        public async Task<IResponse> RemoveAsync(int id)
-        {
-            var data = await _unitOfWork.GetRepository<Application>().FindAsync(id);
-            if (data == null)
-                return new Response(ResponseType.NotFound, $"{id} idsine sahip bir data bulunamadı.");
-            _unitOfWork.GetRepository<Application>().Remove(data);
-            await _unitOfWork.SaveChangesAsync();
-            return new Response(ResponseType.Success);
         }
     }
 }
