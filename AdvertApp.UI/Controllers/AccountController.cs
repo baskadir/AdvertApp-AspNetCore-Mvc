@@ -34,8 +34,6 @@ namespace AdvertApp.UI.Controllers
             return View();
         }
 
-        // TODO: kayıt olurken şifre hashnelerek database'e kayıt olsun
-
         public async Task<IActionResult> SignUp()
         {
             var response = await _genderService.GetAllAsync();

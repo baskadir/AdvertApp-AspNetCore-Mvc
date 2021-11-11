@@ -33,6 +33,7 @@ namespace AdvertApp.Business.Services
             if (result.IsValid)
             {
                 var user = _mapper.Map<AppUser>(dto);
+                user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
                 await _unitOfWork.GetRepository<AppUser>().CreateAsync(user);
 
                 await _unitOfWork.GetRepository<AppUserRole>().CreateAsync(new AppUserRole
@@ -51,8 +52,8 @@ namespace AdvertApp.Business.Services
             var result = _loginDtoValidator.Validate(dto);
             if (result.IsValid)
             {
-                var user = await _unitOfWork.GetRepository<AppUser>().GetByFilterAsync(x => x.Username == dto.Username && x.Password == dto.Password);
-                if(user != null)
+                var user = await _unitOfWork.GetRepository<AppUser>().GetByFilterAsync(x => x.Username == dto.Username);
+                if(user != null && BCrypt.Net.BCrypt.Verify(dto.Password,user.Password))
                 {
                     var userDto = _mapper.Map<AppUserListDto>(user);
                     return new Response<AppUserListDto>(ResponseType.Success, userDto);

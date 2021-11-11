@@ -12,7 +12,7 @@ namespace AdvertApp.DataAccess.Configurations
             builder.Property(x => x.LastName).HasMaxLength(300).IsRequired();
             builder.Property(x => x.Username).HasMaxLength(300).IsRequired();
             builder.Property(x => x.PhoneNumber).HasMaxLength(20).IsRequired();
-            builder.Property(x => x.Password).HasMaxLength(50).IsRequired();
+            builder.Property(x => x.Password).IsRequired();
             builder.Property(x => x.Email).HasMaxLength(300).IsRequired();
             builder.Property(x => x.BirthDate).IsRequired();
             builder.Property(x => x.School).HasMaxLength(500).IsRequired();
