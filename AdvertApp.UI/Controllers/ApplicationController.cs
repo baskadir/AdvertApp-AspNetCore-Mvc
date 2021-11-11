@@ -131,6 +131,14 @@ namespace AdvertApp.UI.Controllers
             return View(list);
         }
 
+        [Authorize(Roles ="Member")]
+        public async Task<IActionResult> AppliedList()
+        {
+            var userId = Convert.ToInt32((User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)).Value);
+            var list = await _applicationService.GetUserApplications(userId);
+            return View(list);
+        }
+
         private async Task<string> CreateFile(IFormFile file, string fileDirectory)
         {
             var fileName = Guid.NewGuid().ToString();

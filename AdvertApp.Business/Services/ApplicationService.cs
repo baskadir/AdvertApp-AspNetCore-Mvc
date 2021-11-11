@@ -73,5 +73,13 @@ namespace AdvertApp.Business.Services
             var data = await _unitOfWork.GetRepository<Application>().GetByFilterAsync(x=>x.AdvertisementId == advertId && x.AppUserId == userId);
             return data == null ? false : true;
         }
+
+        public async Task<IEnumerable<ApplicationListDto>> GetUserApplications(int userId)
+        {
+            //var list = await _unitOfWork.GetRepository<Application>().GetAllAsync(x => x.AppUserId == userId);
+            var query = _unitOfWork.GetRepository<Application>().GetQuery();
+            var list = await query.Include(x => x.Advertisement).Include(x => x.ApplicationStatus).Include(x => x.MilitaryStatus).Include(x => x.AppUser).ThenInclude(x => x.Gender).Where(x => x.AppUserId == userId).ToListAsync();
+            return _mapper.Map<IEnumerable<ApplicationListDto>>(list);
+        }
     }
 }
