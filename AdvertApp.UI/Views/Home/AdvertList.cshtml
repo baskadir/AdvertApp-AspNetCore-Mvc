@@ -1,5 +1,9 @@
 ﻿@model List<AdvertisementListDto>
 
+@{ 
+    string progressBarColor = string.Empty;
+}
+
 <div class=" container py-5">
     <div class="row">
         @for (int i = 0; i < Model.Count; i++)
@@ -14,17 +18,22 @@
                             </div>
                         </div>
                     </div>
-                    @*TODO : başvuru sayısını database de tutup burada gösterelim.*@
                 <div class="mt-3">
                     <h4 class="heading">
                         <a class="text-decoration-none text-black" asp-action="AdvertDetail" asp-controller="Home" asp-route-id="@Model[i].Id">@Model[i].Title</a>
                     </h4>
                     <p>@Model[i].City</p>
                     <div class="mt-5">
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress" style="height:14px;">
+                            @if (Model[i].ApplicationCount <= 50)
+                                progressBarColor = "bg-info";
+                            else if (Model[i].ApplicationCount <= 80)
+                                progressBarColor = "bg-warning";
+                            else
+                                progressBarColor = "bg-danger";
+                            <div class="progress-bar @progressBarColor" role="progressbar" style="width: @Model[i].ApplicationCount%" aria-valuenow="@Model[i].ApplicationCount" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                        <div class="mt-3"> <span class="text1">32 Applied <span class="text2">of 50 capacity</span></span> </div>
+                        <div class="mt-3"> <em class="text1 text-muted">@Model[i].ApplicationCount Başvuru @*<span class="text2">of 50 capacity</span>*@</em> </div>
                     </div>
                 </div>
                 </div>

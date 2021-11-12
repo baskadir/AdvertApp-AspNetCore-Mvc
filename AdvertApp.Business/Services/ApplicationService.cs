@@ -91,5 +91,12 @@ namespace AdvertApp.Business.Services
             await _unitOfWork.SaveChangesAsync();
             return new Response(ResponseType.Success);
         }
+
+        public int GetApplicationCount(int advertId)
+        {
+            var query = _unitOfWork.GetRepository<Application>().GetQuery().GroupBy(x => x.AdvertisementId).Select(x => new { advertisementId = x.Key, count = x.Count() });
+            var data = query.Where(x => x.advertisementId == advertId).SingleOrDefault();
+            return data.count;
+        }
     }
 }

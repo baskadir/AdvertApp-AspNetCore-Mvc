@@ -33,7 +33,6 @@
                         <td>@(application.PostponeEndDate==null?"-":application.PostponeEndDate?.ToString("dd-MM-yyyy"))</td>
                         <td>@application.WorkExperience</td>
                         <td>
-                            <a asp-action="SetStatus" asp-controller="Application" asp-route-applicationId="@application.Id" asp-route-type="@((int)ApplicationStatusType.InterviewCall)">Mülakata Çağır</a>
                             <a asp-action="SetStatus" asp-controller="Application" asp-route-applicationId="@application.Id" asp-route-type="@((int)ApplicationStatusType.Negative)">Reddet</a>
                         </td>
                     </tr>

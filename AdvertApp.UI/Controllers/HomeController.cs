@@ -30,6 +30,10 @@ namespace AdvertApp.UI.Controllers
         public async Task<IActionResult> AdvertList()
         {
             var response = await _advertisementService.GetActivesAsync();
+            foreach (var item in response.Data)
+            {
+                item.ApplicationCount = _applicationService.GetApplicationCount(item.Id);
+            }
             return this.ResponseView(response);
         }
 
