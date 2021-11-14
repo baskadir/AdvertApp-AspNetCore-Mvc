@@ -1,0 +1,31 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="tr" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title>404 Sayfa Bulunamadı</title>
+    <link rel="stylesheet" href="~/css/notFoundStyle.css">
+</head>
+<body>
+    <div id="error-page">
+        <div class="content">
+            <h2 class="header" data-text="404">
+                404
+            </h2>
+            <h4 data-text="Sayfa Bulunamadı">
+                Sayfa Bulunamadı
+            </h4>
+            <p>
+                Üzgünüz, aradığınız sayfa bulunamadı. Bir sorun olduğunu düşünüyorsanız bize bildirin.
+            </p>
+            <div class="btns">
+                <a asp-action="Index" asp-controller="Home">Anasayfaya dön</a>
+                <a href="#">Sorunu bildir</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

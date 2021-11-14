@@ -13,6 +13,7 @@
         </div>
     </div>
 </header>
+
 <!-- Icons Grid-->
 <section class="features-icons bg-light text-center" id="scroll">
     <div class="container">
@@ -45,20 +46,20 @@
 <!-- Services Section -->
 @for (int i = 0; i < Model.Count; i++)
 {
-<section class="showcase">
-    <div class="container-fluid p-0">
-        <div class="row g-0">
-            @*<div class="col-lg-6 @(i%2==0?"order-lg-2":"") text-white showcase-img" style="background-image: url('@Model[i].ImagePath')"></div>*@
-            <div class="col-lg-6 @(i%2==0? "order-lg-2" : "") showcase-text text-center">
-                <img class="img-fluid rounded-circle" src=@Model[i].ImagePath alt="..." />
-            </div>
-            <div class="col-lg-6 @(i%2==0?"order-lg-1":"") my-auto showcase-text" style="text-align:justify;">
-                <h2 class="text-center mb-3">@Model[i].Title</h2>
-                <p class="lead mb-0">@Model[i].Description</p>
+    <section class="showcase">
+        <div class="container-fluid p-0">
+            <div class="row g-0">
+                @*<div class="col-lg-6 @(i%2==0?"order-lg-2":"") text-white showcase-img" style="background-image: url('@Model[i].ImagePath')"></div>*@
+                <div class="col-lg-6 @(i%2==0? "order-lg-2" : "") showcase-text text-center">
+                    <img class="img-fluid rounded-circle" src=@Model[i].ImagePath alt="..." />
+                </div>
+                <div class="col-lg-6 @(i%2==0?"order-lg-1":"") my-auto showcase-text" style="text-align:justify;">
+                    <h2 class="text-center mb-3">@Model[i].Title</h2>
+                    <p class="lead mb-0">@Model[i].Description</p>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 }
 
 

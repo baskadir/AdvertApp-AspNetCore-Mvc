@@ -52,5 +52,10 @@ namespace AdvertApp.UI.Controllers
             }
             return this.ResponseView(response);
         }
+
+        public IActionResult NotFound(int code)
+        {
+            return View();
+        }
     }
 }
