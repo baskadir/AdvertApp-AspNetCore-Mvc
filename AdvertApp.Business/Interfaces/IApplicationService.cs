@@ -14,6 +14,7 @@ namespace AdvertApp.Business.Interfaces
         Task<bool> CheckUserApplicationAsync(int advertId, int userId);
         Task<IEnumerable<ApplicationListDto>> GetUserApplications(int userId);
         Task<IResponse> RemoveAsync(int id);
-        int GetApplicationCount(int advertId);
+        int GetApplicationCountByAdvert(int advertId);
+        int GetTotalApplicatonCount();
     }
 }

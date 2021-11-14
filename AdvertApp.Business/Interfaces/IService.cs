@@ -2,6 +2,7 @@
 using AdvertApp.Dtos.Interfaces;
 using AdvertApp.Entities.Abstract;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace AdvertApp.Business.Interfaces
@@ -17,5 +18,6 @@ namespace AdvertApp.Business.Interfaces
         Task<IResponse<IDto>> GetByIdAsync<IDto>(int id);
         Task<IResponse<UpdateDto>> UpdateAsync(UpdateDto dto);
         Task<IResponse> RemoveAsync(int id);
+        IQueryable<T> GetQuery();
     }
 }

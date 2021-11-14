@@ -9,6 +9,7 @@ using AutoMapper;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace AdvertApp.Business.Services
@@ -85,6 +86,11 @@ namespace AdvertApp.Business.Services
                 return new Response<UpdateDto>(ResponseType.Success, dto);
             }
             return new Response<UpdateDto>(dto,result.ConvertToCustomValidationError());
+        }
+
+        public IQueryable<T> GetQuery()
+        {
+            return _unitOfWork.GetRepository<T>().GetQuery();
         }
     }
 }

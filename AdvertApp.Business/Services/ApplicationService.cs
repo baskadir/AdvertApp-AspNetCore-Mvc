@@ -60,7 +60,7 @@ namespace AdvertApp.Business.Services
             return _mapper.Map<IEnumerable<ApplicationListDto>>(list);
         }
 
-        public async Task SetStatusAsync(int applicationId,ApplicationStatusType type)
+        public async Task SetStatusAsync(int applicationId, ApplicationStatusType type)
         {
             var query = _unitOfWork.GetRepository<Application>().GetQuery();
             var entity = await query.SingleOrDefaultAsync(x => x.Id == applicationId);
@@ -70,7 +70,7 @@ namespace AdvertApp.Business.Services
 
         public async Task<bool> CheckUserApplicationAsync(int advertId, int userId)
         {
-            var data = await _unitOfWork.GetRepository<Application>().GetByFilterAsync(x=>x.AdvertisementId == advertId && x.AppUserId == userId);
+            var data = await _unitOfWork.GetRepository<Application>().GetByFilterAsync(x => x.AdvertisementId == advertId && x.AppUserId == userId);
             return data == null ? false : true;
         }
 
@@ -92,11 +92,16 @@ namespace AdvertApp.Business.Services
             return new Response(ResponseType.Success);
         }
 
-        public int GetApplicationCount(int advertId)
+        public int GetApplicationCountByAdvert(int advertId)
         {
             var query = _unitOfWork.GetRepository<Application>().GetQuery().GroupBy(x => x.AdvertisementId).Select(x => new { advertisementId = x.Key, count = x.Count() });
             var data = query.Where(x => x.advertisementId == advertId).SingleOrDefault();
             return data.count;
+        }
+
+        public int GetTotalApplicatonCount()
+        {
+            return _unitOfWork.GetRepository<Application>().GetQuery().Count();
         }
     }
 }

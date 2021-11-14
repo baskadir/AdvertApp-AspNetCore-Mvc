@@ -14,26 +14,31 @@ namespace AdvertApp.UI.Controllers
         private readonly IAboutService _aboutService;
         private readonly IAdvertisementService _advertisementService;
         private readonly IApplicationService _applicationService;
-        public HomeController(IAboutService aboutService, IAdvertisementService advertisementService, IApplicationService applicationService)
+        private readonly IAppUserService _appUserService;
+        public HomeController(IAboutService aboutService, IAdvertisementService advertisementService, IApplicationService applicationService, IAppUserService appUserService)
         {
             _aboutService = aboutService;
             _advertisementService = advertisementService;
             _applicationService = applicationService;
+            _appUserService = appUserService;
         }
 
         public async Task<IActionResult> Index()
         {
             var response = await _aboutService.GetAllAsync();
+            ViewBag.TotalAdvertisementCount = _advertisementService.GetQuery().Count();
+            ViewBag.TotalUserCount = _appUserService.GetQuery().Count();
+            ViewBag.TotalApplicationCount = _applicationService.GetTotalApplicatonCount();
             return this.ResponseView(response);
         }
 
         public async Task<IActionResult> AdvertList()
         {
             var response = await _advertisementService.GetActivesAsync();
-            foreach (var item in response.Data)
+            response.Data.ToList().ForEach(x =>
             {
-                item.ApplicationCount = _applicationService.GetApplicationCount(item.Id);
-            }
+                x.ApplicationCount = _applicationService.GetApplicationCountByAdvert(x.Id);
+            });
             return this.ResponseView(response);
         }
 
