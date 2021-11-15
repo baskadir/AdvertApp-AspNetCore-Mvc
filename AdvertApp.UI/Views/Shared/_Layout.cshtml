@@ -27,11 +27,13 @@
                     {
                         @if (User.IsInRole("Member"))
                         {
+                            <li class="nav-item"><a class="nav-link me-lg-3" asp-action="Update" asp-controller="Account">Profil Güncelle</a></li>
                             <li class="nav-item"><a class="nav-link me-lg-3" asp-action="AdvertList" asp-controller="Home">İş İlanları</a></li>
                             <li class="nav-item"><a class="nav-link me-lg-3" asp-action="AppliedList" asp-controller="Application">Başvurduğum İlanlar</a></li>
                         }
                         else if (User.IsInRole("Admin"))
                         {
+                            <li class="nav-item"><a class="nav-link me-lg-3" asp-action="ChangePassword" asp-controller="Account">Şifre Değiştir</a></li>
                             <li class="nav-item"><a class="nav-link me-lg-3" asp-action="List" asp-controller="Advertisement">İlan Yönetimi</a></li>
                             <li class="nav-item"><a class="nav-link me-lg-3" asp-action="List" asp-controller="Application">Başvuru Yönetimi</a></li>
                         }

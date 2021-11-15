@@ -20,5 +20,6 @@ namespace AdvertApp.DataAccess.Interfaces
         void Remove(T entity);
         Task CreateAsync(T entity);
         void Update(T entity, T unchanged);
+        void Update(T entity);
     }
 }

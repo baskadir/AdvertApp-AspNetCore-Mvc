@@ -7,9 +7,12 @@ using AutoMapper;
 using FluentValidation;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -19,14 +22,16 @@ namespace AdvertApp.UI.Controllers
     {
         private readonly IGenderService _genderService;
         private readonly IValidator<UserCreateModel> _createModelValidator;
+        private readonly IValidator<UserPasswordUpdateModel> _passwordUpdateModelValidator;
         private readonly IMapper _mapper;
         private readonly IAppUserService _appUserService;
-        public AccountController(IGenderService genderService, IValidator<UserCreateModel> createModelValidator, IMapper mapper, IAppUserService appUserService)
+        public AccountController(IGenderService genderService, IValidator<UserCreateModel> createModelValidator, IMapper mapper, IAppUserService appUserService, IValidator<UserPasswordUpdateModel> passwordUpdateModelValidator)
         {
             _genderService = genderService;
             _createModelValidator = createModelValidator;
             _mapper = mapper;
             _appUserService = appUserService;
+            _passwordUpdateModelValidator = passwordUpdateModelValidator;
         }
 
         public IActionResult Index()
@@ -104,6 +109,48 @@ namespace AdvertApp.UI.Controllers
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index", "Home");
+        }
+
+        [Authorize(Roles ="Member")]
+        public async Task<IActionResult> Update()
+        {
+            var userId = Convert.ToInt32((User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)).Value);
+            var user = await _appUserService.GetByIdAsync<AppUserUpdateDto>(userId);
+            return View(user.Data);
+        }
+
+        [Authorize(Roles ="Member")]
+        [HttpPost]
+        public async Task<IActionResult> Update(AppUserUpdateDto dto)
+        {
+            var response = await _appUserService.UpdateAsync(dto);
+            return RedirectToAction("Index", "Home");
+        }
+
+        [Authorize(Roles = "Admin,Member")]
+        public IActionResult ChangePassword()
+        {
+            return View(new UserPasswordUpdateModel());
+        }
+
+        [Authorize(Roles ="Admin,Member")]
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(UserPasswordUpdateModel model)
+        {
+            var result = _passwordUpdateModelValidator.Validate(model);
+            if (result.IsValid)
+            {
+                var userId = Convert.ToInt32((User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)).Value);
+                var response = await _appUserService.UpdatePasswordAsync(model.OldPassword, model.NewPassword, userId);
+                if(response.ResponseType == ResponseType.Success)
+                    return RedirectToAction("Update");
+                ModelState.AddModelError("", response.Message);
+            }
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+            }
+            return View(model);
         }
     }
 }

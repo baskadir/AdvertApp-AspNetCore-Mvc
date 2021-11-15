@@ -28,6 +28,7 @@ namespace AdvertApp.UI
         {
             services.AddDependencies(Configuration);
             services.AddTransient<IValidator<UserCreateModel>, UserCreateModelValidator>();
+            services.AddTransient<IValidator<UserPasswordUpdateModel>, UserPasswordUpdateModelValidator>();
 
             #region Cookie Configuration
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>

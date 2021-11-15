@@ -71,5 +71,18 @@ namespace AdvertApp.Business.Services
             var dto = _mapper.Map<IEnumerable<AppRoleListDto>>(roles);
             return new Response<IEnumerable<AppRoleListDto>>(ResponseType.Success, dto);
         }
+
+        public async Task<IResponse> UpdatePasswordAsync(string oldPassword, string newPassword, int id)
+        {
+            var user = await _unitOfWork.GetRepository<AppUser>().FindAsync(id);
+            if (!BCrypt.Net.BCrypt.Verify(oldPassword, user.Password))
+            {
+                return new Response(ResponseType.ValidationError, "Eski şifrenizi yanlış girdiniz.");
+            }
+            user.Password = BCrypt.Net.BCrypt.HashPassword(newPassword);
+            _unitOfWork.GetRepository<AppUser>().Update(user);
+            await _unitOfWork.SaveChangesAsync();
+            return new Response(ResponseType.Success);
+        }
     }
 }
