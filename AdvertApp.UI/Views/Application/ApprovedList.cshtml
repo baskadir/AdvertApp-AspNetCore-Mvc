@@ -11,13 +11,15 @@
         <table class="mt-3 table table-sm table-hover table-striped">
             <thead>
                 <tr>
-                    <th>Başvurulan İlan</th>
-                    <th>Başvuran Kişi</th>
-                    <th>Başvuranın Cinsiyeti</th>
+                    <th>İlan</th>
+                    <th>Fotoğraf</th>
+                    <th>İsim</th>
+                    <th>Cinsiyet</th>
                     <th>Başvuru Durumu</th>
-                    <th>Askerlik Durumu</th>
-                    <th>Tecil Bitiş Tarihi</th>
-                    <th>İş Deneyimi</th>
+                    <th>Askerlik</th>
+                    <th>Tecil Tarihi</th>
+                    <th>Deneyim</th>
+                    <th>Özgeçmişi</th>
                     <th>İşlem</th>
                 </tr>
             </thead>
@@ -26,12 +28,14 @@
                 {
                     <tr>
                         <td>@application.Advertisement.Title</td>
+                        <td><img src="~/photoFiles/@application.PhotoPath" alt="photo" height="50" width="50" /></td>
                         <td>@application.AppUser.FirstName @application.AppUser.LastName</td>
                         <td>@(application.AppUser.Gender.Definition==GenderType.Male.ToString()?"Erkek":(application.AppUser.Gender.Definition == GenderType.Female.ToString()?"Kadın":"Belirtilmedi"))</td>
                         <td>@(application.ApplicationStatus.Definition == ApplicationStatusType.Applied.ToString()?"Başvuruldu":(application.ApplicationStatus.Definition == ApplicationStatusType.InterviewCall.ToString()?"Mülakat Aşamasında":"Olumsuz"))</td>
                         <td>@(application.AppUser.Gender.Definition == GenderType.Male.ToString()?(application.MilitaryStatus.Definition == MilitaryStatusType.Completed.ToString()?"Tamamlandı":(application.MilitaryStatus.Definition==MilitaryStatusType.Exempt.ToString()?"Muaf":"Tecilli")):"-")</td>
                         <td>@(application.PostponeEndDate==null?"-":application.PostponeEndDate?.ToString("dd-MM-yyyy"))</td>
                         <td>@application.WorkExperience</td>
+                        <td>@Html.ActionLink("İndir", "DownloadFile", new { fileName = application.CvPath })</td>
                         <td>
                             <a asp-action="SetStatus" asp-controller="Application" asp-route-applicationId="@application.Id" asp-route-type="@((int)ApplicationStatusType.Negative)">Reddet</a>
                         </td>

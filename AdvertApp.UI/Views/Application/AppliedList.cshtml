@@ -12,13 +12,14 @@
                     <th>Başvuru Durumu</th>
                     <th>Başvuru Tarihi</th>
                     <th>İşlem</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var application in Model)
                 {
                     <tr>
-                        <td>@application.Advertisement.Title</td>
+                        <td><a class="text-decoration-none fw-bold" asp-action="AdvertDetail" asp-controller="Home" asp-route-id="@application.Advertisement.Id">@application.Advertisement.Title</a></td>
                         <td>@(application.Advertisement.Status?"İlan aktif":"İlan kapatılmış")</td>
                         <td>@application.Advertisement.CompanyName</td>
                         <td>@(application.ApplicationStatus.Definition == ApplicationStatusType.Applied.ToString()?"Başvuruldu":(application.ApplicationStatus.Definition == ApplicationStatusType.InterviewCall.ToString()?"Mülakat Aşamasında":"Olumsuz"))</td>
@@ -26,7 +27,7 @@
                         <td>
                             @if (application.Advertisement.Status)
                             {
-                                <a asp-action="Remove" asp-controller="Application" asp-route-applicationId="@application.Id">Başvuruyu Sil</a>
+                                <a class="text-decoration-none text-danger fw-bold" asp-action="Remove" asp-controller="Application" asp-route-applicationId="@application.Id">Başvuruyu Sil</a>
                             }
                         </td>
                     </tr>

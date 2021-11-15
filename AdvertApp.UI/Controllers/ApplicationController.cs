@@ -140,10 +140,18 @@ namespace AdvertApp.UI.Controllers
             return View(list);
         }
 
+        [Authorize(Roles ="Member")]
         public async Task<IActionResult> Remove(int applicationId)
         {
             var response = await _applicationService.RemoveAsync(applicationId);
             return this.ResponseRediretAction(response, "AppliedList");
+        }
+
+        public FileResult DownloadFile(string fileName)
+        {
+            string path = Path.Combine(Directory.GetCurrentDirectory(),"wwwroot","cvFiles",fileName);
+            byte[] bytes = System.IO.File.ReadAllBytes(path);
+            return File(bytes, "application/octet-stream", fileName);
         }
 
         private async Task<string> CreateFile(IFormFile file, string fileDirectory)
@@ -153,7 +161,7 @@ namespace AdvertApp.UI.Controllers
             string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", fileDirectory, fileName + exName);
             var stream = new FileStream(path, FileMode.Create);
             await file.CopyToAsync(stream);
-            return path;
+            return fileName+exName;
         }
     }
 }
