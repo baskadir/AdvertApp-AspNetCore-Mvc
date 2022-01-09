@@ -47,6 +47,11 @@ namespace AdvertApp.Business.Services
             return new Response<AppUserCreateDto>(dto, result.ConvertToCustomValidationError());
         }
 
+        public async Task<bool> CheckUserNameExist(string userName)
+        {
+            return await _unitOfWork.GetRepository<AppUser>().AnyAsync(x => x.Username == userName);
+        }
+
         public async Task<IResponse<AppUserListDto>> CheckUserAsync(AppUserLoginDto dto)
         {
             var result = _loginDtoValidator.Validate(dto);

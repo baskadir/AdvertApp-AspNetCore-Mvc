@@ -12,5 +12,6 @@ namespace AdvertApp.Business.Interfaces
         Task<IResponse<AppUserListDto>> CheckUserAsync(AppUserLoginDto dto);
         Task<IResponse<IEnumerable<AppRoleListDto>>> GetRolesByUserIdAsync(int userId);
         Task<IResponse> UpdatePasswordAsync(string oldPassword, string newPassword, int id);
+        Task<bool> CheckUserNameExist(string userName);
     }
 }

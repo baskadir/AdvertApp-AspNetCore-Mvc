@@ -73,5 +73,10 @@ namespace AdvertApp.DataAccess.Repositories
         {
             _context.Set<T>().Update(entity);
         }
+
+        public async Task<bool> AnyAsync(Expression<Func<T, bool>> filter)
+        {
+            return await _context.Set<T>().AnyAsync(filter) ? true : false;
+        }
     }
 }

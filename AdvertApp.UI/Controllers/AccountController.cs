@@ -1,5 +1,6 @@
 ﻿using AdvertApp.Business.Interfaces;
 using AdvertApp.Common.Enums;
+using AdvertApp.Common.ResponseObjects;
 using AdvertApp.Dtos;
 using AdvertApp.UI.Extensions;
 using AdvertApp.UI.Models;
@@ -55,9 +56,14 @@ namespace AdvertApp.UI.Controllers
             var result = _createModelValidator.Validate(model);
             if (result.IsValid)
             {
-                var dto = _mapper.Map<AppUserCreateDto>(model);
-                var createResponse = await _appUserService.CreateWithRoleAsync(dto, (int)RoleType.Member);
-                return this.ResponseRedirectAction(createResponse, "SignIn");
+                var userNameExist = await _appUserService.CheckUserNameExist(model.Username);
+                if (!userNameExist)
+                {
+                    var dto = _mapper.Map<AppUserCreateDto>(model);
+                    var createResponse = await _appUserService.CreateWithRoleAsync(dto, (int)RoleType.Member);
+                    return this.ResponseRedirectAction(createResponse, "SignIn");
+                }
+                ModelState.AddModelError("", "Bu kullanıcı adıyla bir hesap zaten kayıtlı!");
             }
             foreach (var error in result.Errors)
             {
@@ -111,7 +117,7 @@ namespace AdvertApp.UI.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        [Authorize(Roles ="Member")]
+        [Authorize(Roles = "Member")]
         public async Task<IActionResult> Update()
         {
             var userId = Convert.ToInt32((User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)).Value);
@@ -119,7 +125,7 @@ namespace AdvertApp.UI.Controllers
             return View(user.Data);
         }
 
-        [Authorize(Roles ="Member")]
+        [Authorize(Roles = "Member")]
         [HttpPost]
         public async Task<IActionResult> Update(AppUserUpdateDto dto)
         {
@@ -133,7 +139,7 @@ namespace AdvertApp.UI.Controllers
             return View(new UserPasswordUpdateModel());
         }
 
-        [Authorize(Roles ="Admin,Member")]
+        [Authorize(Roles = "Admin,Member")]
         [HttpPost]
         public async Task<IActionResult> ChangePassword(UserPasswordUpdateModel model)
         {
@@ -142,7 +148,7 @@ namespace AdvertApp.UI.Controllers
             {
                 var userId = Convert.ToInt32((User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)).Value);
                 var response = await _appUserService.UpdatePasswordAsync(model.OldPassword, model.NewPassword, userId);
-                if(response.ResponseType == ResponseType.Success)
+                if (response.ResponseType == ResponseType.Success)
                     return RedirectToAction("Update");
                 ModelState.AddModelError("", response.Message);
             }

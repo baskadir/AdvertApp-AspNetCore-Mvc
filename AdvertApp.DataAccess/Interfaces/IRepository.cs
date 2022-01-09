@@ -21,5 +21,6 @@ namespace AdvertApp.DataAccess.Interfaces
         Task CreateAsync(T entity);
         void Update(T entity, T unchanged);
         void Update(T entity);
+        Task<bool> AnyAsync(Expression<Func<T, bool>> filter);
     }
 }
